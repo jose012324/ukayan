@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Generating Report</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body{
+            font-family: 'Roboto';
+            background: black;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .loading{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .text{
+            color: white;
+            font-size: 100px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .text, .complete {
+            color: #fff;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .percent{
+            position: absolute;
+            left: 190px;
+            color: white;
+            font-size: 18px;
+            letter-spacing: 1px;
+            line-height: 15px;
+        }
+        .text-blink{
+            animation: blink .7s ease-in-out .1s infinite;
+        }
+        @keyframes blink{
+            0%{
+                opacity: 1;
+            }
+            50%{
+                opacity: .2;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        .progress-bar{
+            width: 406px;
+            height: 21px;
+            background: #111;
+            border-radius: 13px;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+        .progress{
+            width: 200px;
+            height: 15px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            border-radius: 13px;
+            transition: width 0.1s ease;
+        }
+        .complete{
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .complete p{
+            font-size: 15px;
+        }
+        .continue {
+            text-decoration: none;
+            width: 65px;
+            background: #52c41a;
+            color: #fff;
+            font-weight: 400;
+            cursor: pointer;
+            display: none;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 18px;
+            margin: 20px 0 0 150px;
+        }
+        
+        .continue:focus {
+            outline: none;
+        }
+        
+        .continue:hover {
+            background: #41a61e;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="text">Sending Report</div>
+        <div class="complete">Report Successfully Send! <br><br>
+            <p>Click 'Continue' To Go HomePage</p>
+        </div>
+        <div class="progress-bar">
+            <div class="percent">100%</div>
+            <div class="progress"></div>
+            
+           <a href="{% url 'loading' %}" class="continue">Continue</a>
+        </div>
+    </div>
+    <script>
+
+        var percent = document.querySelector('.percent');
+        var progress = document.querySelector('.progress');
+        var text = document.querySelector('.text');
+        var complete = document.querySelector('.complete');
+        const continueBtn = document.querySelector('.continue');
+        var count = 4;
+        var per = 16;
+        var loading = setInterval(animate, 50);
+
+        function animate(){
+            if(count == 100 && per == 400){
+                percent.classList.add("text-blink");
+                text.style.display = "block";
+                complete.classList.add(".complete");
+                complete.style.display = "block";
+                continueBtn.classList.add(".continue");
+                continueBtn.style.display = "block";
+                text.classList.add(".text")
+                text.style.display = "none";
+                clearInterval(loading);
+            }else{
+                per = per + 4;
+                count = count + 1;
+                progress.style.width = per + 'px';
+                percent.textContent = count + '%';
+            }
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <style>
+        body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image:url('../images/admin.jpeg');
+    background-size: cover;
+    background-repeat: inherit;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+nav{
+    animation: animate 1s ease-in-out 1 forwards;
+    background-color: #333;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-left: 20px;
+}
+.navbar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+.navbar li{
+    display: inline-block;
+    margin-right: 20px;
+}
+.navbar li:last-child{
+    margin-right: 0;
+}
+.navbar li.right-align{
+    margin-right: auto;
+}
+.navbar li a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.navbar li a:hover{
+    color: #ccc;
+}
+.login-btn{
+    background-color: #4CAF50;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+.close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.conts{
+position: absolute;
+width: 600px;
+height: 350px;
+background-color: #e9d9d9;
+box-shadow: 0 30px 50px #dbdbdb;
+margin: -115px -15px 0px 120px;
+}
+.cont .slide .item{
+    width: 190px;
+    height: 200px;
+    position: absolute;
+    top: 30%;
+    transform: translate(0, 50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px #505050;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    transition: 0.5s;
+}
+.slide .item:nth-child(1),
+.slide .item:nth-child(2){
+    top: 220px;
+    left: 330px;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 50%;
+    height: 50%;
+}
+.slide .item:nth-child(3){
+    left: 75%;
+}
+.slide .item:nth-child(4){
+    left: calc(40% + 455px);
+}
+.slide .item:nth-child(5){
+    left: calc(40% + 670px);
+}
+.slide .item:nth-child(n + 6){
+    left: calc(50% + 650px);
+    opacity: 0;
+}
+.item .ctt{
+    position: absolute;
+    top: 13%;
+    left: 240px;
+    width: 300px;
+    text-align: left;
+    color: #eee;
+    transform: translate(0, -50%);
+    font-family: system-ui;
+    display: none;
+}
+.slide .item:nth-child(2) .ctt{
+    display: block;
+}
+.ctt .nam{
+    font-size: 23px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-weight: bold;
+    animation: animate 1s ease-in-out 1 forwards;
+}
+.ctt .des{
+    font-size: 20px;
+    color: #000;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+}
+@keyframes animate {
+    from{
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+    }
+    to{
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+    }
+    
+}
+.but{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+}
+.but button{
+    width: 40px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border: 1px solid #000;
+    transition: 0.3s;
+}
+.but button:hover{
+    background-color: #ababab;
+    color: #fff;
+}
+.welcome-section {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.welcome-section h1 {
+    color: white;
+    text-shadow: 10px #ccc;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 10px #ccc;
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <h1 class="logo">Welcome to Ukayan</h1>
+        <ul class="navbar">
+            <li><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="{% url 'login' %}" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+    <div class="welcome-section">
+        <h1>Hi there User!</h1>
+        <p>This is the Ukayan System, designed to simplified your work.</p>
+    </div>
+    <div id="con" class="cont">
+        <div class="slide">
+            <div class="item" style="background-image: url({% static 'images/img1.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">JetPunk</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img2.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">Buzzfeed Quizzez</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img3.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">Quik UK</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img4.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">Sporcle</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img5.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">The Pub Quiz Company</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img6.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">Quizly</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img7.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">16 Personalities</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+            <div class="item" style="background-image: url({% static 'images/img8.jpeg' %});">
+                <div class="ctt">
+                    <div class="nam">Wizarding World</div>
+                    <div class="des">Lorem ipsum dolor sit amet.</div>
+                </div>
+            </div>
+        </div>
+        <div class="but">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </div>
+    <script>
+        const $next = document.querySelector('.next');
+const $prev = document.querySelector('.prev');
+
+$next.addEventListener('click', () => {
+const items = document.querySelectorAll('.item');
+document.querySelector('.slide').appendChild(items[0]);
+},
+);
+$prev .addEventListener('click', () => {
+const items = document.querySelectorAll('.item');
+document.querySelector('.slide').prepend(items[items.length - 1]);
+},
+);
+    </script>
+</body>
+</html>

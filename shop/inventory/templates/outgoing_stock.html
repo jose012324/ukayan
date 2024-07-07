@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Outgoing Supply</title>
+    <style>
+        :root {
+    --primary-color: #0e0e0e;
+    --secondary-color: #1c1c1c;
+    --accent-color: #00e5ff;
+    --text-color: #e0e0e0;
+    --card-bg: #1b1b1b;
+    --hover-color: #333;
+    --border-radius: 10px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --neon-glow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+}
+
+[data-theme="light"] {
+    --primary-color: #f5f5f5;
+    --secondary-color: #e0e0e0;
+    --text-color: #1a1a1a;
+    --accent-color: #00a3cc;
+    --card-bg: #ddd;
+    --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --neon-glow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: var(--primary-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+}
+
+h1 {
+    margin-top: 40px;
+    font-size: 3em;
+    animation: fadeIn 1s ease-in-out;
+    text-shadow: var(--neon-glow);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    padding: 15px 30px;
+    margin: 0 10px;
+    border-radius: var(--border-radius);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--box-shadow);
+}
+
+nav a:hover {
+    background: var(--hover-color);
+    transform: scale(1.1);
+    box-shadow: var(--neon-glow);
+}
+
+.theme-switcher {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.theme-switcher button {
+    background: var(--secondary-color);
+    border: none;
+    padding: 15px 30px;
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--box-shadow);
+}
+
+.theme-switcher button:hover {
+    background: var(--hover-color);
+    transform: scale(1.1);
+    box-shadow: var(--neon-glow);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    animation: slideIn 1s ease-in-out;
+}
+
+form {
+    width: 30%;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form button {
+    margin-left: 120px;
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+form button:hover {
+    background-color: green;
+    transform: scale(1.05);
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--secondary-color);
+    color: var(--text-color);
+    width: 100%;
+    box-shadow: var(--box-shadow);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animated {
+    animation: fadeIn 1s ease-in-out;
+}
+main .hed{
+        font-size: 20px;
+        font-weight: 900;
+    }
+    </style>
+</head>
+<body>
+    <main>
+        <h1 class="animated">Outgoing Supply</h1>
+        <p class="animated hed" style="text-align: center;">Welcome back, {{ request.user.username }}</p>
+        <div class="theme-switcher">
+            <button id="themeToggle">
+                <span id="themeIcon">🌞</span>
+            </button>
+        </div>
+        <nav class="animated">
+            <a href="{% url 'admin_dashboard' %}">Home</a>
+            <a href="{% url 'view_staff' %}">View Staff</a>
+            <a href="{% url 'add_supply' %}">Add Supply</a>
+            <a href="{% url 'view_stock' %}">View Stock</a>
+            <a href="{% url 'view_oldstock' %}">View OldStock</a>
+            <a href="{% url 'view_report' %}">View Report</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+        <div class="container animated">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </main>
+    <div class="footer">
+        &copy; 2024 Admin Dashboard. All rights reserved.
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        const updateButton = () => {
+            if (document.documentElement.getAttribute('data-theme') === 'light') {
+                themeIcon.textContent = '🌙';
+            } else {
+                themeIcon.textContent = '🌞';
+            }
+        };
+
+        updateButton();
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateButton();
+        });
+    });
+    </script>
+</body>
+</html>
